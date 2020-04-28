@@ -1,11 +1,12 @@
 import { RouteConfig } from 'vue-router';
+import { HomeRoutes } from 'src/pages/home/homeRoutes';
 
 const routes: RouteConfig[] = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/Index.vue') }]
-  }
+    redirect: '/home'
+  },
+  ...HomeRoutes
 ];
 
 // Always leave this as last one
