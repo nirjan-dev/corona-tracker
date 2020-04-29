@@ -1,15 +1,12 @@
 <template>
-  <toolbar title="Home"></toolbar>
+  <h1>Home</h1>
 </template>
 
 <script>
-import {Toolbar} from 'components/UIComponents'
 import { defineComponent } from '@vue/composition-api'
 export default defineComponent({
     name: 'Home',
-    components: {
-      Toolbar
-    }
+
 })
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <q-toolbar class="text-white bg-primary shadow-5">
+  <q-toolbar class="text-white bg-primary">
       <q-btn flat round dense icon="info" />
       <q-toolbar-title>
         {{ title }}
