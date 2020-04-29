@@ -1,11 +1,16 @@
 <template>
-  <h1>Welcome</h1>
+  <toolbar title="Home"></toolbar>
 </template>
 
 <script>
-export default {
-    name: 'Home'
-}
+import {Toolbar} from 'components/UIComponents'
+import { defineComponent } from '@vue/composition-api'
+export default defineComponent({
+    name: 'Home',
+    components: {
+      Toolbar
+    }
+})
 </script>
 
 <style>
