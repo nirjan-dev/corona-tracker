@@ -1,5 +1,6 @@
 // app global css in SCSS form
 
+
 // typography
 
 body {
@@ -39,3 +40,6 @@ h2, .text-h2 {
 h1, .text-h1 {
     font-size: 3.05rem;
 }
+
+// flags
+@import './flag'
