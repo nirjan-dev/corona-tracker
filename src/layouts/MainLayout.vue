@@ -18,8 +18,8 @@
 import { Toolbar } from 'components/UIComponents';
 import { BottomNav } from 'components/UIComponents';
 
-import { createComponent } from '@vue/composition-api';
-export default createComponent({
+import { defineComponent } from '@vue/composition-api';
+export default defineComponent({
   name: 'MainLayout',
 
   components: {
