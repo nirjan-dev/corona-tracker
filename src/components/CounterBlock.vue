@@ -11,7 +11,6 @@ export default defineComponent({
     name: 'CounterBlock',
     props: {
         count: {
-            type: String,
             required: true
         },
         label: {
