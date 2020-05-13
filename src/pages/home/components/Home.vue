@@ -2,12 +2,12 @@
   <div class="container q-px-md">
     <div class="row q-my-md justify-between items-center">
       <h2 class="text-h4 title">Latest Info</h2>
-      <q-chip outline color="primary">
+      <q-chip outline color="primary" class="text-uppercase">
         <q-avatar>
           <!-- TODO: use local icon set for flags  -->
-          <span class="flag flag-np q-ml-sm"></span>
+          <span :class="`flag flag-${state.countryCode} q-ml-sm`"></span>
         </q-avatar>
-        NP
+        {{ state.countryCode }}
       </q-chip>
     </div>
 
@@ -136,6 +136,9 @@ export default defineComponent({
       }),
       casesLoaded: computed(() => {
         return $store.state.HomeModule.casesLoaded;
+      }),
+      countryCode: computed(() => {
+        return $store.state.countryCode.toLowerCase();
       })
     });
 

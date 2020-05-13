@@ -18,6 +18,7 @@ module.exports = configure(function (ctx) {
     boot: [
       'composition-api',
       'axios',
+      'comma-filter'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
