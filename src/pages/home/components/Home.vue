@@ -33,7 +33,7 @@
       </q-btn-toggle>
     </div>
 
-    <div>
+    <div v-if="state.casesLoaded">
       <q-tab-panels v-model="state.activeTab" animated>
         <q-tab-panel name="total">
           <div class="row q-col-gutter-x-lg q-col-gutter-y-lg">
@@ -62,6 +62,10 @@
         </q-tab-panel>
       </q-tab-panels>
     </div>
+
+    <div class="row justify-center items-center q-py-md" v-if="!state.casesLoaded">
+      <q-spinner-hourglass color="primary" size="lg" />
+    </div>
   </div>
 </template>
 
@@ -86,7 +90,7 @@ export default defineComponent({
         return [
           {
             label: 'Total Cases',
-            count: $store.state.HomeModule.todayCaseStats.total,
+            count: $store.state.HomeModule.totalCaseStats.total,
             textColor: 'text-warning'
           },
           {
@@ -129,6 +133,9 @@ export default defineComponent({
             textColor: 'text-positive'
           }
         ];
+      }),
+      casesLoaded: computed(() => {
+        return $store.state.HomeModule.casesLoaded;
       })
     });
 

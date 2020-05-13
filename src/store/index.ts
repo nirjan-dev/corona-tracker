@@ -25,7 +25,20 @@ export default store(function ({ Vue }) {
 
     // enable strict mode (adds overhead!)
     // for dev mode only
-    strict: !!process.env.DEV
+    strict: !!process.env.DEV,
+    state: {
+      countryCode: null
+    },
+    actions: {
+      setCountryCode (context, countryCode) {
+        context.commit('SET_COUNTRY_CODE', countryCode);
+      }
+    },
+    mutations: {
+      SET_COUNTRY_CODE (state, countryCode) {
+        state.countryCode = countryCode;
+      }
+    }
   });
 
   return Store;

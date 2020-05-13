@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 
-const loadTotalCases = async () => {
-    const responseCountry = await (await axios.get('https://api.thevirustracker.com/free-api?countryTotal=NP')).data;
+const loadTotalCases = async (countryCode: string) => {
+    const responseCountry = await (await axios.get(`https://api.thevirustracker.com/free-api?countryTotal=${countryCode}`)).data;
     const resultsCountry = responseCountry.countrydata[0];
     const countryStats = {
         active: resultsCountry.total_active_cases,
@@ -13,8 +13,8 @@ const loadTotalCases = async () => {
     return countryStats;
 }
 
-const loadTodayCases = async () => {
-    const responseCountry = await (await axios.get('https://api.thevirustracker.com/free-api?countryTimeline=NP')).data;
+const loadTodayCases = async (countryCode: string) => {
+    const responseCountry = await (await axios.get(`https://api.thevirustracker.com/free-api?countryTimeline=${countryCode}`)).data;
     const timelineItems = responseCountry.timelineitems[0];
     const timelineItemsKeysArray = Object.keys(timelineItems);
     const todayCasesFull = timelineItems[timelineItemsKeysArray[timelineItemsKeysArray.length - 2]];
@@ -27,9 +27,9 @@ const loadTodayCases = async () => {
     return todayCases;
 }
 
-export const loadCases = async () => {
-    const totalCases = await loadTotalCases();
-    const todayCases = await loadTodayCases();
+export const loadCases = async (countryCode: string) => {
+    const totalCases = await loadTotalCases(countryCode);
+    const todayCases = await loadTodayCases(countryCode);
     return {
         todayCases,
         totalCases
