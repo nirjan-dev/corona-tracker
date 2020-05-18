@@ -1,42 +1,69 @@
 <template>
   <div id="q-app">
     <router-view v-if="currentCountryCode" />
-        <div class="loading row justify-center items-center q-py-md" v-if="!currentCountryCode">
+    <div
+      class="loading row justify-center items-center q-py-md"
+      v-if="!currentCountryCode"
+    >
       <q-spinner-hourglass color="primary" size="8rem" />
     </div>
+
+    
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, computed } from "@vue/composition-api"
-import {useCountryCode} from 'src/composition-functions/useCountryCode'
+import { defineComponent, onMounted, computed, ref } from '@vue/composition-api';
+import { useCountryCode } from 'src/composition-functions/useCountryCode';
 export default defineComponent({
   name: 'App',
-  setup(props, {root: {$store}}: any) {
-    const { getCountryCode } = 
-    useCountryCode({defaultCode: 'US'});
-    
+  setup(props, { root }) {
+    const { getCountryCode } = useCountryCode();
+
     const currentCountryCode = computed(() => {
-      return $store.state.countryCode;
-    })
+      return root.$store.state.countryCode;
+    });
 
     onMounted(async () => {
-      const countryCode = await getCountryCode();
-      $store.dispatch('setCountryCode', countryCode);
-    })
+      const storageKey = 'CoronaApp-countryCode';
+      // check if country code has already been saved
+      let countryCode = localStorage.getItem(storageKey);
+
+      if (!countryCode) {
+        // if no country code found, use geoLocation to get country Code
+        countryCode = await getCountryCode();
+
+        // if geoLocation fails, show a dropdown of country names
+        if (!countryCode) {
+          root.$q.dialog({
+            title: 'Country',
+            message: 'Please pick your country',
+            prompt: {
+              model: '',
+              type: 'text'
+            },
+            cancel: false,
+            persistent: true
+          }).onOk((countryCode: string) => {
+              root.$store.dispatch('setCountryCode', countryCode);
+              localStorage.setItem(storageKey, countryCode);
+          })
+        }
+      }
+      root.$store.dispatch('setCountryCode', countryCode);
+      localStorage.setItem(storageKey, countryCode || '');
+    });
+
 
     return {
-      currentCountryCode
-    }
-
-
+      currentCountryCode,
+    };
   }
-})
+});
 </script>
 
-
 <style lang="scss">
-  .loading {
-    height: 100vh;
-  }
+.loading {
+  height: 100vh;
+}
 </style>
