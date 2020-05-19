@@ -15,6 +15,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, computed, ref } from '@vue/composition-api';
 import { useCountryCode } from 'src/composition-functions/useCountryCode';
+import { CountrySelect } from './components/UIComponents';
 export default defineComponent({
   name: 'App',
   setup(props, { root }) {
@@ -36,14 +37,7 @@ export default defineComponent({
         // if geoLocation fails, show a dropdown of country names
         if (!countryCode) {
           root.$q.dialog({
-            title: 'Country',
-            message: 'Please pick your country',
-            prompt: {
-              model: '',
-              type: 'text'
-            },
-            cancel: false,
-            persistent: true
+            component: CountrySelect
           }).onOk((countryCode: string) => {
               root.$store.dispatch('setCountryCode', countryCode);
               localStorage.setItem(storageKey, countryCode);

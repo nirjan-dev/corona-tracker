@@ -1,6 +1,6 @@
 <template>
   <q-toolbar class="text-white bg-primary">
-      <q-btn flat round dense icon="info" />
+      <q-btn flat round dense icon="settings" />
       <q-toolbar-title>
         {{ title }}
       </q-toolbar-title>
