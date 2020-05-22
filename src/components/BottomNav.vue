@@ -4,9 +4,9 @@
         class="bg-white text-dark"
         active-color="primary"
       >
-        <q-tab name="home" icon="home" label="Home" />
-        <q-tab name="global" icon="language" label="Global" />
-        <q-tab name="news" icon="list" label="News" />
+        <q-route-tab name="home" icon="home" label="Home" to="/home" />
+        <q-route-tab name="global" icon="language" label="Global" to="/global" />
+        <q-route-tab name="news" icon="list" label="News" to="/home" />
       </q-tabs>
 </template>
 

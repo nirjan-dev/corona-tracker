@@ -1,6 +1,7 @@
 import { RouteConfig } from 'vue-router';
 import { HomeRoutes } from 'src/pages/home/homeRoutes';
 import MainLayout from 'layouts/MainLayout.vue'
+import { GlobalRoutes } from 'src/pages/global/globalRoutes';
 const routes: RouteConfig[] = [
   {
     path: '/',
@@ -10,7 +11,8 @@ const routes: RouteConfig[] = [
     path: '/',
     component: MainLayout,
     children: [
-      ...HomeRoutes
+      ...HomeRoutes,
+      ...GlobalRoutes
     ]
   },
 ];

@@ -5,5 +5,6 @@ export const HomeRoutes: RouteConfig[] = [
   {
     path: '/home',
     component: Home,
+    name: 'Home'
   }
 ];
