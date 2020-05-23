@@ -6,15 +6,32 @@
         Global
       </q-chip>
     </div>
+
+      <stats-display moduleName="GlobalModule"></stats-display>
   </div>
 </template>
 
 <script lang="ts">
 import {
-  defineComponent,
+  defineComponent, onMounted
 } from '@vue/composition-api';
+import { StatsDisplay } from 'components/containers/ContainerComponents'
 export default defineComponent({
-  name: 'Home'
+  name: 'Home',
+   setup(props, { root: { $store } }: any) {
+    const loadCases = async () => {
+      await $store.dispatch('GlobalModule/loadCases');
+    };
+
+
+    onMounted(async () => {
+      await loadCases();
+    });
+  },
+
+  components: {
+    StatsDisplay
+  }
 });
 </script>
 

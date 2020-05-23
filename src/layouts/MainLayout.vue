@@ -15,10 +15,10 @@
 </template>
 
 <script lang="ts">
-import { Toolbar } from 'components/UIComponents';
-import { BottomNav } from 'components/UIComponents';
+import { Toolbar } from 'components/UI/UIComponents';
+import { BottomNav } from 'components/UI/UIComponents';
 
-import { defineComponent, ref, watchEffect, computed, watch } from '@vue/composition-api';
+import { defineComponent, ref } from '@vue/composition-api';
 export default defineComponent({
   name: 'MainLayout',
 

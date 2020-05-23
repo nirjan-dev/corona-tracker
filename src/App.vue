@@ -15,7 +15,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, computed, ref } from '@vue/composition-api';
 import { useCountryCode } from 'src/composition-functions/useCountryCode';
-import { CountrySelect } from './components/UIComponents';
+import { CountrySelect } from './components/UI/UIComponents';
 export default defineComponent({
   name: 'App',
   setup(props, { root }) {
