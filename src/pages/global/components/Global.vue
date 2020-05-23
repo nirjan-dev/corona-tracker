@@ -1,28 +1,30 @@
 <template>
-  <div class="container q-px-md">
-    <div class="row q-my-md justify-between items-center">
-      <h2 class="text-h4 title">Latest Info</h2>
-      <q-chip outline color="primary" class="text-uppercase">
-        Global
-      </q-chip>
-    </div>
+  <container>
+    <section>
+      <section-header
+        title="Latest Info"
+        :badge="{
+          title: 'Global'
+        }"
+      ></section-header>
 
       <stats-display moduleName="GlobalModule"></stats-display>
-  </div>
+    </section>
+  </container>
 </template>
 
 <script lang="ts">
-import {
-  defineComponent, onMounted
-} from '@vue/composition-api';
-import { StatsDisplay } from 'components/containers/ContainerComponents'
+import { defineComponent, onMounted } from '@vue/composition-api';
+import { StatsDisplay } from 'components/containers/ContainerComponents';
+import { SectionHeader } from 'components/UI/UIComponents';
+import { Container } from 'components/UI/UIComponents';
+
 export default defineComponent({
   name: 'Home',
-   setup(props, { root: { $store } }: any) {
+  setup(props, { root: { $store } }: any) {
     const loadCases = async () => {
       await $store.dispatch('GlobalModule/loadCases');
     };
-
 
     onMounted(async () => {
       await loadCases();
@@ -30,7 +32,9 @@ export default defineComponent({
   },
 
   components: {
-    StatsDisplay
+    StatsDisplay,
+    SectionHeader,
+    Container
   }
 });
 </script>
@@ -39,5 +43,4 @@ export default defineComponent({
 .title {
   margin: 0;
 }
-
 </style>
