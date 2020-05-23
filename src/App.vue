@@ -13,9 +13,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, computed, ref } from '@vue/composition-api';
+import { defineComponent, onMounted, computed } from '@vue/composition-api';
 import { useCountryCode } from 'src/composition-functions/useCountryCode';
-import { CountrySelect } from './components/UI/UIComponents';
+import { CountrySelectDialog } from './components/UI/UIComponents';
 export default defineComponent({
   name: 'App',
   setup(props, { root }) {
@@ -37,7 +37,7 @@ export default defineComponent({
         // if geoLocation fails, show a dropdown of country names
         if (!countryCode) {
           root.$q.dialog({
-            component: CountrySelect
+            component: CountrySelectDialog
           }).onOk((countryCode: string) => {
               root.$store.dispatch('setCountryCode', countryCode);
               localStorage.setItem(storageKey, countryCode);
