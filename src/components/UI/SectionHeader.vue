@@ -1,6 +1,6 @@
 <template>
   <header class="row justify-between items-center">
-    <h2 class="text-h4 title">{{ title }}</h2>
+    <h2 class="text-h5 title text-dark">{{ title }}</h2>
     <q-chip v-if="badge" outline color="primary" class="text-uppercase">
       <q-avatar v-if="badge.flag">
         <span :class="`flag flag-${badge.flag} q-ml-sm`"></span>
