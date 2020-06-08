@@ -6,7 +6,7 @@ export const loadCases = async ({commit, state, rootState}:any) =>  {
     return
   }
 
-  const cases = await loadCasesFromApi(rootState.countryCode);
+  const cases = await loadCasesFromApi();
   commit('LOAD_CASES', cases);
   commit('FINISH_LOADING_CASES');
 }

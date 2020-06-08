@@ -1,7 +1,11 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <toolbar :title="title"></toolbar>
+      <toolbar :title="title">
+    
+        <country-select :lightText="true" :borderless="true"></country-select>
+
+      </toolbar>
     </q-header>
 
     <q-page-container>
@@ -16,7 +20,7 @@
 
 <script lang="ts">
 import { Toolbar } from 'components/UI/UIComponents';
-import { BottomNav } from 'components/UI/UIComponents';
+import { BottomNav, CountrySelect } from 'components/UI/UIComponents';
 
 import { defineComponent, ref } from '@vue/composition-api';
 export default defineComponent({
@@ -24,7 +28,8 @@ export default defineComponent({
 
   components: {
     Toolbar,
-    BottomNav
+    BottomNav,
+    CountrySelect
   },
 
   setup(props, context) {
@@ -45,3 +50,6 @@ export default defineComponent({
 
 });
 </script>
+
+<style lang="scss">
+</style>

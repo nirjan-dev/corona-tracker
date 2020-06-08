@@ -1,6 +1,6 @@
 <template>
   <q-select
-    filled
+    :class="lightText ?  'light-select full-width' : 'full-width'"
     v-model="selectedCountry"
     use-input
     hide-selected
@@ -10,9 +10,13 @@
     @filter="filterFn"
     option-value="Code"
     option-label="Name"
-    label="Select country"
     behavior="menu"
+    placeholder="Search country"
     @input="onValueChange"
+    :input-style="{
+      color: lightText ? 'white' : 'inherit'
+    }"
+    :borderless="borderless"
   >
     <template v-slot:no-option>
       <q-item>
@@ -32,7 +36,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const countriesList = ref(countries);
     const options = ref(countriesList.value);
-    const selectedCountry = ref(options.value[0]);
+    const selectedCountry = ref(null);
   
 
     function filterFn(val: string, update: any) {
@@ -54,8 +58,24 @@ export default defineComponent({
       filterFn,
       onValueChange
     };
+  },
+  props: {
+    lightText: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    borderless: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
   }
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+  .light-select >>> .q-field__marginal {
+    color: white;
+  }
+</style>
