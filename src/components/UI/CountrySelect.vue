@@ -52,11 +52,16 @@ export default defineComponent({
       emit('valueChange', selectedCountry.value);
     }
 
+    function resetCountry() {
+      selectedCountry.value = null;
+    }
+
     return {
       options,
       selectedCountry,
       filterFn,
-      onValueChange
+      onValueChange,
+      resetCountry
     };
   },
   props: {
@@ -70,6 +75,10 @@ export default defineComponent({
       required: false,
       default: false
     }
+  },
+
+  watch: {
+    '$route': 'resetCountry'
   }
 });
 </script>

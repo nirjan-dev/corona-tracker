@@ -36,7 +36,7 @@ export default defineComponent({
     const name: string = context.root.$route.name || 'Home';
     const title = ref(name);
     function onCountrySelect(country: any) {
-      context.root.$router.push(`search/${country.Code}`);
+      context.root.$router.push(`/search/${country.Code}`);
     }
     return {
       title,
