@@ -3,7 +3,7 @@
     <q-header elevated>
       <toolbar :title="title">
     
-        <country-select :lightText="true" :borderless="true"></country-select>
+        <country-select @valueChange="onCountrySelect" :lightText="true" :borderless="true"></country-select>
 
       </toolbar>
     </q-header>
@@ -35,8 +35,12 @@ export default defineComponent({
   setup(props, context) {
     const name: string = context.root.$route.name || 'Home';
     const title = ref(name);
+    function onCountrySelect(country: any) {
+      context.root.$router.push(`search/${country.Code}`);
+    }
     return {
-      title
+      title,
+      onCountrySelect
     }
   },
 

@@ -2,6 +2,7 @@ import { RouteConfig } from 'vue-router';
 import { HomeRoutes } from 'src/pages/home/homeRoutes';
 import MainLayout from 'layouts/MainLayout.vue'
 import { GlobalRoutes } from 'src/pages/global/globalRoutes';
+import { SearchRoutes } from 'src/pages/search/searchRoutes';
 const routes: RouteConfig[] = [
   {
     path: '/',
@@ -12,7 +13,8 @@ const routes: RouteConfig[] = [
     component: MainLayout,
     children: [
       ...HomeRoutes,
-      ...GlobalRoutes
+      ...GlobalRoutes,
+      ...SearchRoutes,
     ]
   },
 ];

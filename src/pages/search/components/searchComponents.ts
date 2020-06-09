@@ -1,0 +1,1 @@
+export { default as Search } from 'pages/search/components/Search.vue'
