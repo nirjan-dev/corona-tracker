@@ -2,6 +2,7 @@ import { store } from 'quasar/wrappers';
 import Vuex from 'vuex';
 import { HomeModule } from 'pages/home/state/homeState';
 import { GlobalModule } from 'pages/global/state/globalState';
+import { SearchModule } from 'pages/search/state/searchState';
 
 // import example from './module-example'
 // import exampleState from './module-example/state'
@@ -23,7 +24,8 @@ export default store(function ({ Vue }) {
   const Store = new Vuex.Store({
     modules: {
       HomeModule,
-      GlobalModule
+      GlobalModule,
+      SearchModule
     },
 
     // enable strict mode (adds overhead!)
