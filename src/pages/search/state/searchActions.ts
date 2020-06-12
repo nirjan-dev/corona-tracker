@@ -1,4 +1,4 @@
-import { loadCases as loadCasesFromApi } from "../api"
+import { loadCountryCases as loadCasesFromApi } from 'src/api'
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const loadCases = async ({commit, state}:any) =>  {
