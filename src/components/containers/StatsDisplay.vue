@@ -33,7 +33,6 @@
                 :key="caseBlock.label"
                 :count="caseBlock.count"
                 :label="caseBlock.label"
-                :textColor="caseBlock.textColor"
               ></counter-block>
             </div>
           </q-tab-panel>
@@ -46,7 +45,6 @@
                 :key="caseBlock.label"
                 :count="caseBlock.count"
                 :label="caseBlock.label"
-                :textColor="caseBlock.textColor"
               ></counter-block>
             </div>
           </q-tab-panel>
@@ -72,22 +70,18 @@ export default defineComponent({
         {
           label: 'Total Cases',
           count: $store.state[moduleName].totalCaseStats.total,
-          textColor: 'text-warning'
         },
         {
           label: 'Deaths Today',
           count: $store.state[moduleName].todayCaseStats.deathsToday,
-          textColor: 'text-negative'
         },
         {
           label: 'New Cases',
           count: $store.state[moduleName].todayCaseStats.newCases,
-          textColor: 'text-info'
         },
         {
           label: 'Recoveries Today',
           count: $store.state[moduleName].todayCaseStats.recoveriesToday,
-          textColor: 'text-positive'
         }
       ];
     });
@@ -97,22 +91,18 @@ export default defineComponent({
         {
           label: 'Total Cases',
           count: $store.state[moduleName].totalCaseStats.total,
-          textColor: 'text-warning'
         },
         {
           label: 'Deaths',
           count: $store.state[moduleName].totalCaseStats.deaths,
-          textColor: 'text-negative'
         },
         {
           label: 'Active Cases',
           count: $store.state[moduleName].totalCaseStats.active,
-          textColor: 'text-info'
         },
         {
           label: 'Recoveries',
           count: $store.state[moduleName].totalCaseStats.recoveries,
-          textColor: 'text-positive'
         }
       ];
     });

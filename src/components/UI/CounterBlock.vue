@@ -1,7 +1,7 @@
 <template>
     <div>
         <small>{{ label }}</small>
-        <p class="text-h5" :class="[textColor]">{{ count | comma }}</p>
+        <p class="text-h4">{{ count | comma }}</p>
     </div>
 </template>
 
@@ -14,10 +14,6 @@ export default defineComponent({
             required: true
         },
         label: {
-            type: String,
-            required: true
-        },
-        textColor: {
             type: String,
             required: true
         }
