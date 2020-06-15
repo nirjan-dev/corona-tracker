@@ -15,6 +15,7 @@ const state = {
     recoveriesToday: 0
   },
   casesLoaded: false,
+  loadError: false,
   searchCountryCode: null,
 };
 

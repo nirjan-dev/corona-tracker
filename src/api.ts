@@ -5,6 +5,9 @@ const altApi = 'https://api.covid19api.com';
 
 const loadTotalCases = async (countryCode: string) => {
     const responseCountry = await (await axios.get(`${baseApi}?countryTotal=${countryCode}`)).data;
+    if(!responseCountry.countrydata) {
+        return null;
+    }
     const resultsCountry = responseCountry.countrydata[0];
     const countryStats = {
         active: resultsCountry.total_active_cases,
@@ -17,6 +20,9 @@ const loadTotalCases = async (countryCode: string) => {
 
 const loadTodayCases = async (countryCode: string) => {
     const responseCountry = await (await axios.get(`${baseApi}?countryTimeline=${countryCode}`)).data;
+    if (!responseCountry.timelineitems) {
+        return null;
+    }
     const timelineItems = responseCountry.timelineitems[0];
     const timelineItemsKeysArray = Object.keys(timelineItems);
     const todayCasesFull = timelineItems[timelineItemsKeysArray[timelineItemsKeysArray.length - 2]];
@@ -32,6 +38,9 @@ const loadTodayCases = async (countryCode: string) => {
 export const loadCountryCases = async (countryCode: string) => {
     const totalCases = await loadTotalCases(countryCode);
     const todayCases = await loadTodayCases(countryCode);
+    if (!totalCases || !todayCases) {
+        return null;
+    }
     return {
         todayCases,
         totalCases

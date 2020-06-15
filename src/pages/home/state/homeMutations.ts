@@ -7,3 +7,7 @@ export function LOAD_CASES (state: any, cases: any) {
 export function FINISH_LOADING_CASES (state: any) {
   state.casesLoaded = true;
 }
+
+export function SET_LOADING_ERROR(state: any, errorState: boolean) {
+  state.loadingError = errorState;
+}

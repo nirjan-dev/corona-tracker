@@ -1,6 +1,6 @@
 <template>
   <article>
-    <div v-if="casesLoaded">
+    <div v-if="casesLoaded && !loadingError">
       <section class="q-my-md">
         <q-btn-toggle
           v-model="activeTab"
@@ -52,8 +52,14 @@
       </section>
     </div>
 
-    <div class="row justify-center items-center q-py-md" v-if="!casesLoaded">
+    <div class="row justify-center items-center q-py-md" v-if="!casesLoaded && !loadingError">
       <q-spinner-hourglass color="primary" size="lg" />
+    </div>
+
+    <div v-if="casesLoaded && loadingError">
+    <q-banner inline-actions class="text-white bg-red">
+      Sorry, we can't get the info for this country right now, Please try another country.
+    </q-banner>
     </div>
   </article>
 </template>
@@ -111,11 +117,16 @@ export default defineComponent({
       return $store.state[moduleName].casesLoaded;
     });
 
+    const loadingError = computed(() => {
+      return $store.state[moduleName].loadingError;
+    })
+
     return {
       activeTab,
       totalCaseData,
       todayCaseData,
-      casesLoaded
+      casesLoaded,
+      loadingError
     };
   },
   components: {
