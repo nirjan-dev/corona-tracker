@@ -16,6 +16,9 @@
 import { defineComponent, onMounted, computed } from '@vue/composition-api';
 import { useCountryCode } from 'src/composition-functions/useCountryCode';
 import { CountrySelectDialog } from './components/UI/UIComponents';
+
+export const STORAGE_KEY = 'CoronaApp-countryCode';
+
 export default defineComponent({
   name: 'App',
   setup(props, { root }) {
@@ -26,9 +29,8 @@ export default defineComponent({
     });
 
     onMounted(async () => {
-      const storageKey = 'CoronaApp-countryCode';
       // check if country code has already been saved
-      let countryCode = localStorage.getItem(storageKey);
+      let countryCode = localStorage.getItem(STORAGE_KEY);
 
       if (!countryCode) {
         // if no country code found, use geoLocation to get country Code
@@ -40,12 +42,12 @@ export default defineComponent({
             component: CountrySelectDialog
           }).onOk((countryCode: string) => {
               root.$store.dispatch('setCountryCode', countryCode);
-              localStorage.setItem(storageKey, countryCode);
+              localStorage.setItem(STORAGE_KEY, countryCode);
           })
         }
       }
       root.$store.dispatch('setCountryCode', countryCode);
-      localStorage.setItem(storageKey, countryCode || '');
+      localStorage.setItem(STORAGE_KEY, countryCode || '');
     });
 
 
