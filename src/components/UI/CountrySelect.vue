@@ -32,6 +32,7 @@
 <script lang="ts">
 import { defineComponent, ref } from '@vue/composition-api';
 import { countries } from 'src/countries';
+import * as fuzzysearch from 'fuzzysearch';
 export default defineComponent({
   name: 'CountrySelect',
   setup(props, { emit }) {
@@ -42,8 +43,11 @@ export default defineComponent({
     function filterFn(val: string, update: any) {
       update(() => {
         const needle = val.toLowerCase();
-        options.value = countriesList.value.filter(v =>
-          v.Name.toLowerCase().includes(needle)
+        options.value = countriesList.value.filter(country =>
+          // country.Name.toLowerCase().includes(needle)
+          {
+            return fuzzysearch(needle, country.Name.toLowerCase());
+          }
         );
       });
     }
