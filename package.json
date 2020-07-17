@@ -19,7 +19,8 @@
     "axios": "^0.18.1",
     "fuzzysearch": "^1.0.3",
     "quasar": "^1.9.5",
-    "vue-comma-filter": "^1.1.0"
+    "vue-comma-filter": "^1.1.0",
+    "vue2-frappe": "^1.0.29"
   },
   "devDependencies": {
     "@quasar/app": "^1.6.2",
