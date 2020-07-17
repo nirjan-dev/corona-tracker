@@ -36,6 +36,7 @@ export default defineComponent({
         .onOk((countryCode: string) => {
           this.$root.$store.dispatch('setCountryCode', countryCode);
           localStorage.setItem(STORAGE_KEY, countryCode);
+          this.$router.push({path: '/home'});
           location.reload();
         });
     }
