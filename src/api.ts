@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const baseApi = 'https://corona.lmao.ninja/v2';
+const timelineLimit = 7;
 
 export const loadCountryCases = async (countryCode: string) => {
     let response;
@@ -49,3 +50,12 @@ export const loadGlobalCases = async () => {
     }
 }
 
+
+export const loadCountryTimeline = async (countryCode: string) => {
+    const response = await (await axios.get(`${baseApi}/historical/${countryCode}?lastdays=${timelineLimit}`)).data;
+    if (response.timeline) {
+        return response.timeline;
+    } else {
+        return null;
+    }
+}

@@ -12,30 +12,33 @@
       <stats-display moduleName="HomeModule"></stats-display>
     </section>
 
+    <q-select
+      v-model="selectedTimelineOption"
+      :options="timelineOptions"
+      label="Select timeline type"
+      behavior="menu"
+    />
+
     <vue-frappe
-      id="test"
-      :labels="[
-        '12am-3am',
-        '3am-6am',
-        '6am-9am',
-        '9am-12pm',
-        '12pm-3pm',
-        '3pm-6pm',
-        '6pm-9pm',
-        '9pm-12am'
-      ]"
-      title="My Awesome Chart"
-      type="axis-mixed"
-      :height="300"
-      :colors="['purple', '#ffa3ef', 'light-blue']"
-      :dataSets="data"
+      v-if="selectedTimelineData"
+      id="timeline"
+      :labels="labels"
+      type="line"
+      :height="200"
+      :dataSets="selectedTimelineData"
+      :tooltipOptions="tooltipOptions"
     >
     </vue-frappe>
   </container>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, computed } from '@vue/composition-api';
+import {
+  defineComponent,
+  onMounted,
+  computed,
+  ref
+} from '@vue/composition-api';
 import { StatsDisplay } from 'components/containers/ContainerComponents';
 import { SectionHeader } from 'components/UI/UIComponents';
 import { Container } from 'components/UI/UIComponents';
@@ -43,38 +46,126 @@ import { Container } from 'components/UI/UIComponents';
 export default defineComponent({
   name: 'Home',
   setup(props, { root: { $store } }: any) {
+    const selectedTimelineOption = ref('cases');
+    const timelineOptions = ['cases', 'recoveries', 'deaths'];
+    // const timeLineColors = ref(new Map());
+    // timeLineColors.value.set('cases', 'blue');
+    // timeLineColors.value.set('recoveries', 'green');
+    // timeLineColors.value.set('deaths', 'red');
+
+    // const selectedColors = computed(() => {
+    //   return [timeLineColors.value.get(selectedTimelineOption.value)];
+    // })
+
     const loadCases = async () => {
       await $store.dispatch('HomeModule/loadCases');
     };
+
+    const loadTimeline = async () => {
+      await $store.dispatch('HomeModule/loadTimeline');
+    };
+
     const countryCode = computed(() => {
       return $store.state.countryCode.toLowerCase();
     });
 
-    onMounted(async () => {
-      await loadCases();
+    const timeline = computed(() => {
+      return $store.state.HomeModule.timeline;
     });
 
-    const data = [
-      {
-        name: 'Some Data',
-        chartType: 'bar',
-        values: [25, 40, 30, 35, 8, 52, 17, -4]
-      },
-      {
-        name: 'Another Set',
-        chartType: 'bar',
-        values: [25, 50, -10, 15, 18, 32, 27, 14]
-      },
-      {
-        name: 'Yet Another',
-        chartType: 'line',
-        values: [15, 20, -3, -15, 58, 12, -17, 37]
+    onMounted(async () => {
+      await loadCases();
+      await loadTimeline();
+    });
+
+    const tooltipOptions = {
+      formatTooltipY: (d: any) => d
+    };
+
+    // const data = [
+    //   {
+    //     name: 'cases',
+    //     values: [25000, 400000, 3000000, 3500000, 8000, 520000, 1700000]
+    //   },
+    //   {
+    //     name: 'deaths',
+    //     values: [20000, 40000, 450000, 35000, 1000, 1520, 19000]
+    //   },
+    //   {
+    //     name: 'recoveries',
+    //     values: [1500, 2000, 30000, 3200, 50, 20, 1100]
+    //   }
+    // ];
+    interface Itimeline {
+      name: string;
+      values: number[];
+    }
+    const data = computed(() => {
+      if (!timeline.value) {
+        return null;
       }
-    ];
+      const timelineData: Itimeline[] = [
+        {
+          name: 'cases',
+          values: []
+        },
+        {
+          name: 'deaths',
+          values: []
+        },
+        {
+          name: 'recoveries',
+          values: []
+        }
+      ];
+      for (const key in timeline.value.cases) {
+        if (Object.prototype.hasOwnProperty.call(timeline.value.cases, key)) {
+          const cases = timeline.value.cases[key];
+          const deaths = timeline.value.deaths[key];
+          const recoveries = timeline.value.recovered[key];
+
+          timelineData[0].values.push(cases);
+          timelineData[1].values.push(deaths);
+          timelineData[2].values.push(recoveries);
+        }
+      }
+
+      return timelineData;
+    });
+
+    const selectedTimelineData = computed(() => {
+      if (!data.value) return;
+
+      return data.value.filter(dataPoint => {
+        return dataPoint.name === selectedTimelineOption.value;
+      });
+    });
+
+    const labels = computed(() => {
+      if (!timeline.value) return null;
+
+      const labels = [];
+      for (const key in timeline.value.cases) {
+        if (Object.prototype.hasOwnProperty.call(timeline.value.cases, key)) {
+          const date = key;
+          const dateParts = date.split('/');
+          const formatteDate = dateParts[0] + '/' + dateParts[1];
+          labels.push(formatteDate);
+        }
+      }
+      return labels;
+    });
 
     return {
       countryCode,
-      data
+      data,
+      labels,
+      tooltipOptions,
+      timelineOptions,
+      selectedTimelineOption,
+      selectedTimelineData
+      // timeLineColors,
+      // selectedColors
     };
   },
   components: {

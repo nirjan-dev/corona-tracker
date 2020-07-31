@@ -17,6 +17,9 @@ const state = {
   },
   casesLoaded: false,
   loadingError: false,
+  timeline: null,
+  timeLineError: false,
+  timeLineLoaded: false
 };
 
 export const HomeModule = {
