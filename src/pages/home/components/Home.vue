@@ -27,6 +27,7 @@
       :height="200"
       :dataSets="selectedTimelineData"
       :tooltipOptions="tooltipOptions"
+      :class="selectedColorClass"
     >
     </vue-frappe>
   </container>
@@ -48,14 +49,14 @@ export default defineComponent({
   setup(props, { root: { $store } }: any) {
     const selectedTimelineOption = ref('cases');
     const timelineOptions = ['cases', 'recoveries', 'deaths'];
-    // const timeLineColors = ref(new Map());
-    // timeLineColors.value.set('cases', 'blue');
-    // timeLineColors.value.set('recoveries', 'green');
-    // timeLineColors.value.set('deaths', 'red');
+    const timeLineColors = ref(new Map());
+    timeLineColors.value.set('cases', 'primary-chart');
+    timeLineColors.value.set('recoveries', 'positive-chart');
+    timeLineColors.value.set('deaths', 'negative-chart');
 
-    // const selectedColors = computed(() => {
-    //   return [timeLineColors.value.get(selectedTimelineOption.value)];
-    // })
+    const selectedColorClass = computed(() => {
+      return timeLineColors.value.get(selectedTimelineOption.value);
+    })
 
     const loadCases = async () => {
       await $store.dispatch('HomeModule/loadCases');
@@ -82,20 +83,6 @@ export default defineComponent({
       formatTooltipY: (d: any) => d
     };
 
-    // const data = [
-    //   {
-    //     name: 'cases',
-    //     values: [25000, 400000, 3000000, 3500000, 8000, 520000, 1700000]
-    //   },
-    //   {
-    //     name: 'deaths',
-    //     values: [20000, 40000, 450000, 35000, 1000, 1520, 19000]
-    //   },
-    //   {
-    //     name: 'recoveries',
-    //     values: [1500, 2000, 30000, 3200, 50, 20, 1100]
-    //   }
-    // ];
     interface Itimeline {
       name: string;
       values: number[];
@@ -163,9 +150,9 @@ export default defineComponent({
       tooltipOptions,
       timelineOptions,
       selectedTimelineOption,
-      selectedTimelineData
+      selectedTimelineData,
       // timeLineColors,
-      // selectedColors
+      selectedColorClass
     };
   },
   components: {
@@ -184,5 +171,33 @@ export default defineComponent({
 .flag {
   border-radius: 50%;
   padding: 0.2em;
+}
+
+::v-deep .primary-chart {
+  path {
+    stroke: $primary !important;
+  }
+  circle {
+    fill: darken($primary, 5) !important;
+  }
+}
+
+
+::v-deep .negative-chart {
+  path {
+    stroke: $negative !important;
+  }
+  circle {
+    fill: darken($negative, 5) !important;
+  }
+}
+
+::v-deep .positive-chart {
+  path {
+    stroke: $positive !important;
+  }
+  circle {
+    fill: darken($positive, 5) !important;
+  }
 }
 </style>
