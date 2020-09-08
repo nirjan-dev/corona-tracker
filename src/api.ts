@@ -32,7 +32,12 @@ export const loadCountryCases = async (countryCode: string) => {
 
 
 export const loadGlobalCases = async () => {
-    const response = await axios.get(`${baseApi}/all`);
+    let response;
+    try {
+        response = await axios.get(`${baseApi}/all`);
+    } catch (error) {
+        return null;
+    }
     const globalData = response.data;
     return {
         totalCases: {

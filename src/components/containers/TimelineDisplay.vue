@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="data">
     <q-select
       v-model="selectedTimelineOption"
       :options="timelineOptions"

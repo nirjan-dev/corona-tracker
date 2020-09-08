@@ -7,6 +7,11 @@ export const loadCases = async ({commit, state, rootState}:any) =>  {
   }
 
   const cases = await loadCasesFromApi();
-  commit('LOAD_CASES', cases);
+  if (!cases) {
+    commit('SET_LOADING_ERROR', true);
+  } else {
+    commit('SET_LOADING_ERROR', false);
+    commit('LOAD_CASES', cases);
+  }
   commit('FINISH_LOADING_CASES');
 }

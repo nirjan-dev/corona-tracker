@@ -58,7 +58,7 @@
 
     <div v-if="casesLoaded && loadingError">
     <q-banner inline-actions class="text-white bg-red">
-      Sorry, we can't get the info for this country right now, Please try another country.
+      Sorry, we can't get the info for this location right now, Please try another location.
     </q-banner>
     </div>
   </article>
