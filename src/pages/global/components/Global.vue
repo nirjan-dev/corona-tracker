@@ -10,14 +10,15 @@
 
       <stats-display moduleName="GlobalModule"></stats-display>
     </section>
+
+    <timeline-display moduleName="GlobalModule" />
   </container>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted } from '@vue/composition-api';
-import { StatsDisplay } from 'components/containers/ContainerComponents';
-import { SectionHeader } from 'components/UI/UIComponents';
-import { Container } from 'components/UI/UIComponents';
+import { StatsDisplay, TimelineDisplay } from 'components/containers/ContainerComponents';
+import { SectionHeader, Container } from 'components/UI/UIComponents';
 
 export default defineComponent({
   name: 'Home',
@@ -34,7 +35,8 @@ export default defineComponent({
   components: {
     StatsDisplay,
     SectionHeader,
-    Container
+    Container,
+    TimelineDisplay
   }
 });
 </script>

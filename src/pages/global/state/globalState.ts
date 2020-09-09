@@ -16,7 +16,10 @@ const state = {
     recoveriesToday: 0
   },
   casesLoaded: false,
-  loadingError: false
+  loadingError: false,
+  timeline: null,
+  timeLineError: false,
+  timeLineLoaded: false
 };
 
 export const GlobalModule = {
