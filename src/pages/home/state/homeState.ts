@@ -18,8 +18,8 @@ const state = {
   casesLoaded: false,
   loadingError: false,
   timeline: null,
-  timeLineError: false,
-  timeLineLoaded: false
+  timelineError: false,
+  timelineLoaded: false
 };
 
 export const HomeModule = {

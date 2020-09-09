@@ -52,14 +52,18 @@
       </section>
     </div>
 
-    <div class="row justify-center items-center q-py-md" v-if="!casesLoaded && !loadingError">
+    <div
+      class="row justify-center items-center q-py-md"
+      v-if="!casesLoaded && !loadingError"
+    >
       <q-spinner-hourglass color="primary" size="lg" />
     </div>
 
     <div v-if="casesLoaded && loadingError">
-    <q-banner inline-actions class="text-white bg-red">
-      Sorry, we can't get the info for this location right now, Please try another location.
-    </q-banner>
+      <q-banner inline-actions class="text-white bg-red">
+        Sorry, we can't get the info for this location right now, Please try
+        another location.
+      </q-banner>
     </div>
   </article>
 </template>
@@ -75,19 +79,19 @@ export default defineComponent({
       return [
         {
           label: 'Total Cases',
-          count: $store.state[moduleName].totalCaseStats.total,
+          count: $store.state[moduleName].totalCaseStats.total
         },
         {
           label: 'Deaths Today',
-          count: $store.state[moduleName].todayCaseStats.deathsToday,
+          count: $store.state[moduleName].todayCaseStats.deathsToday
         },
         {
           label: 'New Cases',
-          count: $store.state[moduleName].todayCaseStats.newCases,
+          count: $store.state[moduleName].todayCaseStats.newCases
         },
         {
           label: 'Recoveries Today',
-          count: $store.state[moduleName].todayCaseStats.recoveriesToday,
+          count: $store.state[moduleName].todayCaseStats.recoveriesToday
         }
       ];
     });
@@ -96,19 +100,19 @@ export default defineComponent({
       return [
         {
           label: 'Total Cases',
-          count: $store.state[moduleName].totalCaseStats.total,
+          count: $store.state[moduleName].totalCaseStats.total
         },
         {
           label: 'Deaths',
-          count: $store.state[moduleName].totalCaseStats.deaths,
+          count: $store.state[moduleName].totalCaseStats.deaths
         },
         {
           label: 'Active Cases',
-          count: $store.state[moduleName].totalCaseStats.active,
+          count: $store.state[moduleName].totalCaseStats.active
         },
         {
           label: 'Recoveries',
-          count: $store.state[moduleName].totalCaseStats.recoveries,
+          count: $store.state[moduleName].totalCaseStats.recoveries
         }
       ];
     });
@@ -119,7 +123,7 @@ export default defineComponent({
 
     const loadingError = computed(() => {
       return $store.state[moduleName].loadingError;
-    })
+    });
 
     return {
       activeTab,

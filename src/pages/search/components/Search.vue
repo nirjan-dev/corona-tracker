@@ -1,6 +1,6 @@
 <template>
   <container>
-    <section>
+    <section class="q-mb-md">
       <section-header
         title="Latest Info"
         :badge="{
@@ -11,12 +11,17 @@
 
       <stats-display moduleName="SearchModule"></stats-display>
     </section>
+
+    <section>
+      <section-header title="History"></section-header>
+      <timeline-display moduleName="SearchModule" />
+    </section>
   </container>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from '@vue/composition-api';
-import { StatsDisplay } from 'components/containers/ContainerComponents';
+import { StatsDisplay, TimelineDisplay } from 'components/containers/ContainerComponents';
 import { SectionHeader, Container } from 'components/UI/UIComponents';
 export default defineComponent({
   name: 'Search',
@@ -56,7 +61,8 @@ export default defineComponent({
   components: {
     StatsDisplay,
     SectionHeader,
-    Container
+    Container,
+    TimelineDisplay
   }
 });
 </script>

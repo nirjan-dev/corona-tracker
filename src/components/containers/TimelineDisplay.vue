@@ -1,24 +1,40 @@
 <template>
-  <section v-if="data">
-    <q-select
-      v-model="selectedTimelineOption"
-      :options="timelineOptions"
-      label="Select timeline type"
-      behavior="menu"
-    />
+  <div>
+    <section v-if="timelineLoaded && !loadingError && data">
+      <q-select
+        v-model="selectedTimelineOption"
+        :options="timelineOptions"
+        label="Select timeline type"
+        behavior="menu"
+      />
 
-    <vue-frappe
-      v-if="selectedTimelineData"
-      id="timeline"
-      :labels="labels"
-      type="line"
-      :height="200"
-      :dataSets="selectedTimelineData"
-      :tooltipOptions="tooltipOptions"
-      :class="selectedColorClass"
+      <vue-frappe
+        v-if="selectedTimelineData"
+        id="timeline"
+        :labels="labels"
+        type="line"
+        :height="200"
+        :dataSets="selectedTimelineData"
+        :tooltipOptions="tooltipOptions"
+        :class="selectedColorClass"
+      >
+      </vue-frappe>
+    </section>
+
+    <div
+      class="row justify-center items-center q-py-md"
+      v-if="!timelineLoaded && !loadingError"
     >
-    </vue-frappe>
-  </section>
+      <q-spinner-hourglass color="primary" size="lg" />
+    </div>
+
+    <div v-if="timelineLoaded && loadingError">
+      <q-banner inline-actions class="text-white bg-red">
+        Sorry, we can't get the history for this location right now, Please try
+        another location.
+      </q-banner>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -49,6 +65,14 @@ export default defineComponent({
 
     const timeline = computed(() => {
       return $store.state[moduleName].timeline;
+    });
+
+    const timelineLoaded = computed(() => {
+      return $store.state[moduleName].timelineLoaded;
+    });
+
+    const loadingError = computed(() => {
+      return $store.state[moduleName].timelineError;
     });
 
     onMounted(async () => {
@@ -126,7 +150,9 @@ export default defineComponent({
       timelineOptions,
       selectedTimelineOption,
       selectedTimelineData,
-      selectedColorClass
+      selectedColorClass,
+      timelineLoaded,
+      loadingError
     };
   },
   props: {

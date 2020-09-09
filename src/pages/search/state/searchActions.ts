@@ -1,4 +1,4 @@
-import { loadCountryCases as loadCasesFromApi } from 'src/api'
+import { loadCountryCases as loadCasesFromApi, loadCountryTimeline as loadTimelineFromApi } from 'src/api'
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const loadCases = async ({commit, state}:any) =>  {
@@ -20,4 +20,21 @@ export const loadCases = async ({commit, state}:any) =>  {
 export const setCountryCode = ({commit}: any, countryCode:string) => {
   commit('RESET_LOADING_CASES');
   commit('SET_COUNTRY_CODE', countryCode);
+}
+
+export const loadTimeline = async ({commit, state, rootState}: any) => {
+  
+  if(state.timelineLoaded) {
+    return;
+  }
+
+  const timeline = await loadTimelineFromApi(rootState.countryCode);
+
+  if (!timeline){
+    commit('SET_TIMELINE_ERROR', true);
+  } else {
+    commit('SET_TIMELINE_ERROR', false);
+    commit('LOAD_TIMELINE', timeline);
+  }
+  commit('FINISH_LOADING_TIMELINE');
 }

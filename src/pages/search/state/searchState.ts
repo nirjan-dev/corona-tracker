@@ -17,6 +17,9 @@ const state = {
   casesLoaded: false,
   loadingError: false,
   searchCountryCode: null,
+  timeline: null,
+  timelineError: false,
+  timelineLoaded: false
 };
 
 export const SearchModule = {
