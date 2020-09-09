@@ -11,7 +11,10 @@
       <stats-display moduleName="GlobalModule"></stats-display>
     </section>
 
-    <timeline-display moduleName="GlobalModule" />
+    <section>
+      <section-header title="History"></section-header>
+      <timeline-display moduleName="GlobalModule" />
+    </section>
   </container>
 </template>
 

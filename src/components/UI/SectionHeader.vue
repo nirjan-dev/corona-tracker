@@ -33,4 +33,12 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+  h2 {
+    margin: 0;
+  }
+
+  header {
+    padding: 0.5rem 0;
+  }
+</style>
