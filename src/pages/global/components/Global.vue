@@ -1,6 +1,6 @@
 <template>
   <container>
-    <section>
+    <section class="q-mb-md">
       <section-header
         title="Latest Info"
         :badge="{
