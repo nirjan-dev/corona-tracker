@@ -145,4 +145,8 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+  article {
+    min-height: 236px;
+  }
+</style>

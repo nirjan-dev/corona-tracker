@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <section v-if="timelineLoaded && !loadingError && data">
       <q-select
         v-model="selectedTimelineOption"
@@ -190,5 +190,9 @@ export default defineComponent({
   circle {
     fill: darken($positive, 5) !important;
   }
+}
+
+.container {
+  min-height: 262px;
 }
 </style>
