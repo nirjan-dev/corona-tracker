@@ -1,7 +1,7 @@
 <template>
     <div>
         <small>{{ label }}</small>
-        <p class="text-h4">{{ count | comma }}</p>
+        <p class="text-h5">{{ count | comma }}</p>
     </div>
 </template>
 

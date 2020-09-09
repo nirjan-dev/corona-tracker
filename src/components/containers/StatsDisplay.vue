@@ -26,7 +26,7 @@
       <section>
         <q-tab-panels v-model="activeTab" animated>
           <q-tab-panel name="total">
-            <div class="row q-col-gutter-x-lg q-col-gutter-y-lg">
+            <div class="row q-col-gutter-x-lg q-col-gutter-y-sm">
               <counter-block
                 class="col-6"
                 v-for="caseBlock in totalCaseData"
