@@ -59,9 +59,6 @@ export default defineComponent({
       return timeLineColors.value.get(selectedTimelineOption.value);
     });
 
-    const loadTimeline = async () => {
-      await $store.dispatch(`${moduleName}/loadTimeline`);
-    };
 
     const timeline = computed(() => {
       return $store.state[moduleName].timeline;
@@ -75,9 +72,6 @@ export default defineComponent({
       return $store.state[moduleName].timelineError;
     });
 
-    onMounted(async () => {
-      await loadTimeline();
-    });
 
     const tooltipOptions = {
       formatTooltipY: (d: any) => d

@@ -19,16 +19,17 @@ export const loadCases = async ({commit, state}:any) =>  {
 
 export const setCountryCode = ({commit}: any, countryCode:string) => {
   commit('RESET_LOADING_CASES');
+  commit('RESET_LOADING_TIMELINE');
   commit('SET_COUNTRY_CODE', countryCode);
 }
 
-export const loadTimeline = async ({commit, state, rootState}: any) => {
+export const loadTimeline = async ({commit, state}: any) => {
   
   if(state.timelineLoaded) {
     return;
   }
 
-  const timeline = await loadTimelineFromApi(rootState.countryCode);
+  const timeline = await loadTimelineFromApi(state.searchCountryCode);
 
   if (!timeline){
     commit('SET_TIMELINE_ERROR', true);

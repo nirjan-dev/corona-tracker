@@ -30,8 +30,13 @@ export default defineComponent({
       await $store.dispatch('GlobalModule/loadCases');
     };
 
+    const loadTimeline = async () => {
+      await $store.dispatch('GlobalModule/loadTimeline');
+    };
+
     onMounted(async () => {
       await loadCases();
+      await loadTimeline();
     });
   },
 

@@ -36,10 +36,10 @@ export default defineComponent({
         countryCode.value
       );
       await context.root.$store.dispatch('SearchModule/loadCases');
+      await context.root.$store.dispatch('SearchModule/loadTimeline');
     }
 
     async function onChangeCountryCode(newCountryCode: string) {
-      console.log('onChangeCountryCode -> countryCode', countryCode);
       countryCode.value = newCountryCode.toLowerCase();
       await reloadCases();
     }

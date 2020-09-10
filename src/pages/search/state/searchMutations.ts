@@ -16,6 +16,7 @@ export function RESET_LOADING_CASES(state: any) {
   state.casesLoaded = false;
 }
 
+
 export function SET_LOADING_ERROR(state: any, errorState: boolean) {
   state.loadingError = errorState;
 }
@@ -32,4 +33,8 @@ export function FINISH_LOADING_TIMELINE (state: any) {
 
 export function SET_TIMELINE_ERROR(state: any, errorState: boolean) {
   state.timelineError = errorState;
+}
+
+export function RESET_LOADING_TIMELINE(state: any) {
+  state.timelineLoaded = false;
 }

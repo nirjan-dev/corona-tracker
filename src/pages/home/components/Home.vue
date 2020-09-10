@@ -34,12 +34,17 @@ export default defineComponent({
       await $store.dispatch('HomeModule/loadCases');
     };
 
+    const loadTimeline = async () => {
+      await $store.dispatch('HomeModule/loadTimeline');
+    };
+
     const countryCode = computed(() => {
       return $store.state.countryCode.toLowerCase();
     });
 
     onMounted(async () => {
       await loadCases();
+      await loadTimeline()
     });
 
     return {
