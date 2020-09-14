@@ -52,11 +52,15 @@
       </section>
     </div>
 
-    <div
-      class="row justify-center items-center q-py-md"
-      v-if="!casesLoaded && !loadingError"
-    >
-      <q-spinner-hourglass color="primary" size="lg" />
+    <div class="q-py-md" v-if="!casesLoaded && !loadingError">
+      <section>
+        <q-skeleton class="q-my-md" height="36px" />
+        <div class="row q-col-gutter-x-md q-col-gutter-y-sm">
+          <div class="col-6" v-for="n in 4" :key="n">
+            <q-skeleton height="80px"></q-skeleton>
+          </div>
+        </div>
+      </section>
     </div>
 
     <div v-if="casesLoaded && loadingError">
@@ -146,7 +150,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-  article {
-    min-height: 236px;
-  }
+article {
+  min-height: 236px;
+}
 </style>

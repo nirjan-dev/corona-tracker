@@ -22,10 +22,10 @@
     </section>
 
     <div
-      class="row justify-center items-center q-py-md"
       v-if="!timelineLoaded && !loadingError"
     >
-      <q-spinner-hourglass color="primary" size="lg" />
+      <!-- <q-spinner-hourglass color="primary" size="lg" /> -->
+      <q-skeleton height="262px" />
     </div>
 
     <div v-if="timelineLoaded && loadingError">
@@ -42,7 +42,6 @@ import {
   defineComponent,
   ref,
   computed,
-  onMounted
 } from '@vue/composition-api';
 
 export default defineComponent({
