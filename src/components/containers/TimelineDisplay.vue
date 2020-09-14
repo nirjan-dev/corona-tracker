@@ -115,11 +115,11 @@ export default defineComponent({
     });
 
     const selectedTimelineData = computed(() => {
-      if (!data.value) return;
+      if (!data.value) return null;
 
       return data.value.filter(dataPoint => {
         return dataPoint.name === selectedTimelineOption.value;
-      });
+      })
     });
 
     const labels = computed(() => {
@@ -185,6 +185,12 @@ export default defineComponent({
     fill: darken($positive, 5) !important;
   }
 }
+
+::v-deep .y.axis text {
+  font-size: 9 !important;
+  transform: translateX(2%) !important;
+}
+
 
 .container {
   min-height: 262px;
