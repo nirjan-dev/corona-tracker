@@ -126,8 +126,8 @@ module.exports = configure(function (ctx) {
         description: 'A PWA for tracking coronavirus cases',
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#ffffff',
-        theme_color: '#027be3',
+        background_color: '#AB47BC',
+        theme_color: '#790E8B',
         icons: [
           {
             src: 'statics/icons/icon-128x128.png',
