@@ -11,7 +11,8 @@
     "lint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore ./",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
-    "generate:icons": "icongenie generate -m pwa -i ./src/assets/icon.png [-b ./src/assets/background.png]"
+    "generate:icons": "icongenie generate -m pwa -i ./src/assets/icon.png [-b ./src/assets/background.png]",
+    "build": "quasar build --mode pwa"
   },
   "dependencies": {
     "@ideditor/country-coder": "^3.2.0",
