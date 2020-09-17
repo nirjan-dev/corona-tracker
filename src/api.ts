@@ -58,7 +58,13 @@ export const loadGlobalCases = async () => {
 
 
 export const loadCountryTimeline = async (countryCode: string) => {
-    const response = await (await axios.get(`${baseApi}/historical/${countryCode}?lastdays=${timelineLimit}`)).data;
+    let response;
+    try {
+        response = await (await axios.get(`${baseApi}/historical/${countryCode}?lastdays=${timelineLimit}`)).data;    
+    } catch (error) {
+        return null;
+    }
+    
     if (response.timeline) {
         return response.timeline;
     } else {
@@ -68,7 +74,13 @@ export const loadCountryTimeline = async (countryCode: string) => {
 
 
 export const loadGlobalTimeline = async () => {
-    const response = await (await axios.get(`${baseApi}/historical/all?lastdays=${timelineLimit}`)).data;
+    let response;
+    try {
+        response = await (await axios.get(`${baseApi}/historical/all?lastdays=${timelineLimit}`)).data;    
+    } catch (error) {
+        return null;
+    }
+    
     if (response) {
         return response;
     } else {
