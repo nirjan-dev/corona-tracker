@@ -1,5 +1,5 @@
 import { register } from 'register-service-worker'
-
+import { Notify } from 'quasar'
 // The ready(), registered(), cached(), updatefound() and updated()
 // events passes a ServiceWorkerRegistration instance in their arguments.
 // ServiceWorkerRegistration: https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration
@@ -28,11 +28,39 @@ register(process.env.SERVICE_WORKER_FILE, {
   },
 
   updated (/* registration */) {
-    // console.log('New content is available; please refresh.')
+    const dismiss = Notify.create({
+      message: 'A new verison of the app is available, would you like to update?',
+      timeout: 10000,
+      position: 'top',
+      multiLine: true,
+      actions: [
+        {
+          label: 'Update app',
+          color: 'white',
+          handler: () => {
+            window.location.reload();
+          }
+        },
+        {
+          label: 'No, thanks',
+          color: 'grey',
+          handler: () => {
+            dismiss();
+          }
+        }
+      ]
+    });
   },
 
   offline () {
-    // console.log('No internet connection found. App is running in offline mode.')
+    Notify.create({
+      message: 'App is offline, please go back online to view the latest covid-19 info',
+      timeout: 10000,
+      color: 'secondary',
+      position: 'top',
+      multiLine: false
+    })
+   
   },
 
   error (/* err */) {
