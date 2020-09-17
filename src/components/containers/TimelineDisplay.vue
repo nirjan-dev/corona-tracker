@@ -187,7 +187,7 @@ export default defineComponent({
 
 ::v-deep .y.axis text {
   font-size: 9 !important;
-  transform: translateX(2%) !important;
+  transform: translateX(1%) !important;
 }
 
 
