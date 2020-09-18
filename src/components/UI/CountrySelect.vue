@@ -3,6 +3,7 @@
     :class="lightText ? 'light-select full-width' : 'full-width'"
     v-model="selectedCountry"
     use-input
+    id="country-select"
     hide-selected
     fill-input
     input-debounce="0"
@@ -54,6 +55,10 @@ export default defineComponent({
 
     function onValueChange() {
       emit('valueChange', selectedCountry.value);
+      const input = document.querySelector('#country-select input');
+      if (input) {
+        (input as HTMLInputElement).blur();
+      }
     }
 
     function resetCountry() {
