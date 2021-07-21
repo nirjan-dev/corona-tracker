@@ -1,0 +1,12 @@
+{
+  "name": "corona",
+  "version": "0.0.1",
+  "description": "A PWA for tracking coronavirus cases",
+  "author": "Nirjan Khadka",
+  "private": true,
+  "dependencies": {
+    "@capacitor/android": "^3.0.1",
+    "@capacitor/cli": "^1.0.0",
+    "@capacitor/core": "^1.0.0"
+  }
+}
